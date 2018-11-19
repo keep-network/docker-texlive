@@ -1,0 +1,14 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: docker:stable
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          command: |
+            docker build --rm=false -t "keepnetwork/texlive:$CIRCLE_BUILD_NUM" .
+            docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
+            docker push "keepnetwork/texlive:$CIRCLE_BUILD_NUM"
