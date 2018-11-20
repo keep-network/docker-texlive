@@ -13,7 +13,7 @@ RUN apk --no-cache add \
         tar \
         make \
         git \
-        ghostscript \
+        poppler-utils \
         bash
 
 RUN wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz && \
@@ -26,8 +26,12 @@ ENV PATH="/usr/local/texlive/2018/bin/x86_64-linuxmusl:${PATH}"
 
 # Install additional packages
 RUN tlmgr install \
-      # PGF/TikZ.
+      # PGF/TikZ/other graphical stuff.
       pgf \
+      xcolor \
+      varwidth \
+      standalone \
+      xkeyval \
       # Fonts and Russian handling.
       ec \
       lh \
