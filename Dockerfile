@@ -25,7 +25,8 @@ RUN wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz && \
 ENV PATH="/usr/local/texlive/2018/bin/x86_64-linuxmusl:${PATH}"
 
 # Install additional packages
-RUN tlmgr install \
+RUN tlmgr update --self && \
+    tlmgr install \
       # PGF/TikZ/other graphical stuff.
       pgf \
       xcolor \
