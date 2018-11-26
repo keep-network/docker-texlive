@@ -38,6 +38,7 @@ RUN tlmgr update --self && \
       lh \
       abstract \
       cyrillic \
+      hyphen-russian \
       babel-russian && \
     # clean up unneeded packages
     apk del wget xz tar && \
