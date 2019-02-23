@@ -23,6 +23,6 @@ subject to the various licenses of the contained software.
 ## Author
 
 This package was written by Antonio Salazar Cardozo, Tech Lead of the
-[Keep](https://keep.network/ project.
+[Keep](https://keep.network/) project.
 
 It is maintained by the Keep team.
