@@ -12,3 +12,9 @@ jobs:
             docker build --rm=false -t "keepnetwork/texlive:$CIRCLE_BUILD_NUM" .
             docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
             docker push "keepnetwork/texlive:$CIRCLE_BUILD_NUM"
+workflows:
+  version: 2
+  push-image:
+    jobs:
+      - build:
+          context: docker-hub
