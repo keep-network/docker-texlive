@@ -14,7 +14,8 @@ RUN apk --no-cache add \
         make \
         git \
         poppler-utils \
-        bash
+        bash \
+        ruby
 
 RUN wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz && \
     tar --strip-components=1 -xvf install-tl-unx.tar.gz && \
@@ -33,6 +34,8 @@ RUN tlmgr update --self && \
       varwidth \
       standalone \
       xkeyval \
+      etoolbox \
+      tikzpeople \
       # Fonts and Russian handling.
       ec \
       lh \
