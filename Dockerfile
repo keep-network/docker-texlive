@@ -34,6 +34,8 @@ RUN tlmgr update --self && \
       varwidth \
       standalone \
       xkeyval \
+      etoolbox \
+      tikzpeople \
       # Fonts and Russian handling.
       ec \
       lh \
