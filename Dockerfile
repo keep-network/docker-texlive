@@ -84,7 +84,7 @@ RUN mkdir /tmp/lib
 WORKDIR /tmp/lib
 COPY lib .
 RUN TEXLIB="$(kpsewhich -var-value=TEXMFHOME)/tex/latex" && \
-  mkdir -p $TEXLIB&& \
+  mkdir -p $TEXLIB && \
   cp * $TEXLIB
 
 RUN mkdir /workdir
