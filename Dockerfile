@@ -22,10 +22,9 @@ RUN wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz && \
     ./install-tl --profile=texlive.profile && \
     cd && rm -rf /tmp/install-tl-unx
 
-
 ENV PATH="/usr/local/texlive/2018/bin/x86_64-linuxmusl:${PATH}"
 
-# Install additional packages
+# Install additional packages from CTAN.
 RUN tlmgr update --self && \
     tlmgr install \
       # PGF/TikZ/other graphical stuff.
@@ -36,6 +35,8 @@ RUN tlmgr update --self && \
       xkeyval \
       etoolbox \
       tikzpeople \
+      xstring \
+      pgfopts\
       # Fonts and Russian handling.
       ec \
       lh \
@@ -43,7 +44,7 @@ RUN tlmgr update --self && \
       cyrillic \
       hyphen-russian \
       babel-russian && \
-    # update fonts and formats
+   # Update fonts and formats.
     fmtutil-sys --all && \
     mktexmf larm1095 && \
     mktexmf larm1440 && \
@@ -73,13 +74,21 @@ RUN tlmgr update --self && \
     mktextfm larm0600 && \
     mktextfm lati1095 && \
     mktextfm latt1095 && \
-    # clean up unneeded packages
+    # Clean up unneeded packages.
     apk del wget xz tar && \
     rm -rf /var/cache/apk/ && mkdir /var/cache/apk/ && \
-    rm -rf /usr/share/man && \
-    mkdir /workdir
+    rm -rf /usr/share/man
+
+# Install additional packages manually.
+RUN mkdir /tmp/lib
+WORKDIR /tmp/lib
+COPY lib .
+RUN TEXLIB="$(kpsewhich -var-value=TEXMFHOME)/tex/latex" && \
+    mkdir -p $TEXLIB && \
+    cp * $TEXLIB
+
+RUN mkdir /workdir
 
 WORKDIR /workdir
 
 VOLUME ["/workdir"]
-
